@@ -1,0 +1,32 @@
+<App>
+    <JavaScript>
+        var Observable = require('FuseJS/Observable');
+
+        var isDialogShowing = Observable(false);
+
+        function showDialog() {
+            isDialogShowing.value = true;
+        }
+
+        module.exports = {
+            isDialogShowing: isDialogShowing,
+            showDialog: showDialog
+        };
+    </JavaScript>
+
+    <!-- Adding Dialog component with `isDialogShowing` Observable as a property -->
+    <Dialog ux:Name="dialog" isDialogShowing="{isDialogShowing}" />
+    
+
+    <WhileTrue Value="{isDialogShowing}">
+        <Change dialog.Opacity="1" Duration=".3" Easing="QuadraticInOut" />
+        <Change mainPanelBlur.Radius="10" Duration=".3" Easing="QuadraticInOut" />
+    </WhileTrue>
+    
+    <EdgeNavigator>
+        <StackPanel Alignment="VerticalCenter">
+            <Button Text="Open Dialog" Clicked="{showDialog}" />
+        </StackPanel>
+        <Blur ux:Name="mainPanelBlur" Radius="0" />
+    </EdgeNavigator> 
+</App>
