@@ -1,21 +1,17 @@
 <App>
     <JavaScript>
-        var Observable = require('FuseJS/Observable');
-
-        var isDialogShowing = Observable(false);
-
-        function showDialog() {
-            isDialogShowing.value = true;
-        }
+        var Dialog = require("Dialog.js");
 
         module.exports = {
-            isDialogShowing: isDialogShowing,
-            showDialog: showDialog
+            isDialogShowing: Dialog.isDialogShowing,
+            showDialog: Dialog.showDialog
         };
+
+
     </JavaScript>
 
     <!-- Adding Dialog component with `isDialogShowing` Observable as a property -->
-    <Dialog ux:Name="dialog" isDialogShowing="{isDialogShowing}" />
+    <Dialog ux:Name="dialog" />
     
 
     <WhileTrue Value="{isDialogShowing}">

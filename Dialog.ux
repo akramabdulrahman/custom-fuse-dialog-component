@@ -1,15 +1,12 @@
 <Panel ux:Class="Dialog" ux:Name="dialog" Alignment="VerticalCenter" Margin="40" Padding="20,40,20,0" Opacity="0">
     <!-- Trying to get `isDialogShowing` Observable as a Property -->
-    <bool ux:Property="isDialogShowing" />
+    <!-- <bool ux:Property="ObservableDialogStatus" /> -->
     <JavaScript>
-        function closeDialog() {
-            console.log("IsDialogShowing: " + isDialogShowing.value);
-            isDialogShowing.value = false;
-        }
-
-        module.exports = {
-            closeDialog: closeDialog
-        };
+       var Dialog = require("Dialog.js");
+       module.exports = {
+            isDialogShowing: Dialog.isDialogShowing,
+            closeDialog: Dialog.closeDialog
+        }; 
     </JavaScript>
     <Rectangle Layer="Background" Fill="#fff" CornerRadius="2" Opacity=".8" />
 
@@ -19,7 +16,7 @@
         <Button Text="Close Dialog" Margin="0,20,0,0" Padding="10,10,10,50" Clicked="{closeDialog}" HitTestMode="LocalBoundsAndChildren" />
     </StackPanel>
 
-    <WhileFalse Value="{isDialogShowing}">
+    <WhileFalse Value="{isDialogShowing}" >
         <Move X="3" RelativeTo="Size" Duration="0.6" Easing="BackIn" />
         <Scale Factor="0.8" Duration=".6" Easing="BackIn" />
     </WhileFalse>
